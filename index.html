@@ -2,56 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dirt Trackerz | The Home of Dirt Track Racing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dirt TrackerZ | Dirt Track Racing</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}
-header{background:#080808;padding:25px 15px;text-align:center;border-bottom:5px solid #e52323}
-h1{font-size:clamp(36px,8vw,64px);margin:0;color:#ffcc00}
-.tagline{font-size:17px;color:#ddd;margin-top:10px}
-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:20px;background:#202020}
-nav a{background:#d51c1c;color:white;text-decoration:none;padding:14px 18px;border-radius:7px;font-weight:bold}
-.hero{text-align:center;padding:55px 20px;background:linear-gradient(135deg,#350707,#151515)}
-.hero h2{font-size:clamp(26px,5vw,42px);color:#ffcc00}
-.hero p{max-width:650px;margin:20px auto;line-height:1.6}
-section{padding:35px 20px;max-width:1100px;margin:auto}
-h2{color:#ffcc00}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:#242424;border-top:4px solid #e52323;border-radius:8px;padding:25px}
-.card h3{color:#ffcc00}
-.card p{line-height:1.5;color:#ddd}
-footer{text-align:center;background:#080808;padding:25px;color:#aaa}
+html{scroll-behavior:smooth}
+body{margin:0;background:#101114;color:white;font-family:Arial,Helvetica,sans-serif}
+header{background:#090a0c;border-bottom:4px solid #e32228;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
+.logo{font-size:clamp(26px,5vw,40px);font-weight:900;font-style:italic;letter-spacing:-1px}
+.logo span{color:#f5ce28}
+nav{display:flex;gap:16px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:13px;font-weight:bold;text-transform:uppercase}
+nav a:hover{color:#f5ce28}
+.ticker{background:#e32228;padding:11px 5%;font-weight:800;font-size:13px;letter-spacing:1px}
+.hero{position:relative;min-height:440px;display:flex;align-items:end;background:linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.08)),url('IMG_7764.JPG') center/cover no-repeat}
+.hero-content{padding:45px 6%;max-width:850px}
+.eyebrow{color:#f5ce28;font-size:14px;font-weight:900;letter-spacing:2px}
+h1{font-size:clamp(36px,7vw,76px);line-height:1.03;margin:12px 0;text-transform:uppercase;font-style:italic}
+.hero p{font-size:18px;line-height:1.5;max-width:650px}
+.btn{display:inline-block;background:#e32228;color:white;padding:15px 23px;text-decoration:none;font-weight:900;text-transform:uppercase;margin-top:12px;border-radius:3px}
+.btn:hover{background:#b81620}
+main{max-width:1300px;margin:auto;padding:35px 5%}
+.section-title{border-left:6px solid #e32228;padding-left:14px;font-size:26px;font-weight:900;text-transform:uppercase;font-style:italic;margin:35px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:#1d2025;border-bottom:4px solid #e32228;overflow:hidden}
+.card img{width:100%;height:230px;object-fit:contain;background:#08090a;display:block}
+.card-body{padding:20px}
+.card h3{margin:0 0 10px;text-transform:uppercase}
+.card p{color:#c7c9ce;line-height:1.5}
+.credit{font-size:12px;color:#f5ce28}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.links a{background:#22262c;border-left:5px solid #e32228;padding:24px 15px;color:white;text-decoration:none;font-size:20px;font-weight:900;text-transform:uppercase;text-align:center}
+.links a:hover{background:#e32228}
+.panel{background:#1d2025;padding:25px;margin:18px 0;border-top:3px solid #f5ce28}
+.panel p{color:#c7c9ce;line-height:1.6}
+footer{background:#08090b;text-align:center;padding:35px 15px;color:#b7b9bf;margin-top:40px}
+@media(max-width:750px){
+.grid,.links{grid-template-columns:1fr}
+header{justify-content:center;text-align:center}
+nav{justify-content:center}
+.hero{min-height:380px}
+.hero-content{padding:30px 6%}
+.card img{height:260px}
+}
 </style>
 </head>
 <body>
 <header>
-<h1>DIRT TRACKERZ</h1>
-<p class="tagline">The Digital Home of Dirt Track Racing</p>
-</header>
+<div class="logo">DIRT TRACKER<span>Z</span></div>
 <nav>
-<a href="#tracks">Tracks</a>
-<a href="#drivers">Drivers</a>
-<a href="#creators">Creators</a>
-<a href="#results">Race Results</a>
+<a href="#photos">Photos</a>
+<a href="#explore">Explore</a>
+<a href="#results">Results</a>
 <a href="#partners">Partners</a>
 </nav>
-<div class="hero">
-<h2>WHERE DIRT TRACK RACING COMES TOGETHER</h2>
-<p>Follow your favorite drivers, discover race tracks, explore racing photography, and stay connected to the dirt track community.</p>
-<p>Built for the fans, drivers, photographers, tracks, and everyone who loves dirt track racing.</p>
-</div>
-<section>
-<h2>Explore Dirt Trackerz</h2>
-<div class="cards">
-<div class="card" id="tracks"><h3>🏁 Race Tracks</h3><p>Discover tracks, events, schedules, and updates.</p></div>
-<div class="card" id="drivers"><h3>🏎️ Drivers</h3><p>Follow your favorite racers and explore driver profiles.</p></div>
-<div class="card" id="creators"><h3>📸 Creators</h3><p>Discover racing photographers, galleries, and write-ups.</p></div>
-<div class="card" id="results"><h3>🏆 Race Results</h3><p>Find feature winners and racing results.</p></div>
-<div class="card"><h3>📣 Racing Community</h3><p>Connect with racing fans and follow the action.</p></div>
-<div class="card" id="partners"><h3>🤝 Partners</h3><p>Meet the businesses supporting dirt track racing.</p></div>
+</header>
+
+<div class="ticker">DIRT TRACK RACING • DRIVERS • TRACKS • PHOTOGRAPHY • RESULTS • THE COMMUNITY</div>
+
+<section class="hero">
+<div class="hero-content">
+<div class="eyebrow">THE HOME OF DIRT TRACK RACING</div>
+<h1>WHERE DIRT TRACK RACING COMES TOGETHER</h1>
+<p>Follow your favorite drivers, discover racetracks, explore racing photography, and stay connected to the dirt track community.</p>
+<a class="btn" href="#explore">Explore Dirt TrackerZ</a>
 </div>
 </section>
-<footer>© 2026 Dirt Trackerz. All rights reserved.</footer>
+
+<main>
+<section id="photos">
+<h2 class="section-title">Featured Racing Photography</h2>
+<div class="grid">
+<article class="card">
+<img src="IMG_7764.JPG" alt="Dirt track racing photograph">
+<div class="card-body">
+<h3>Full Throttle</h3>
+<p>Action from the dirt track.</p>
+<div class="credit">Photography by Chaz Brzeski</div>
+</div>
+</article>
+<article class="card">
+<img src="IMG_7776.JPG" alt="Dirt racing action photograph">
+<div class="card-body">
+<h3>Racing Highlights</h3>
+<p>The moments that make racing unforgettable.</p>
+<div class="credit">Photography by Chaz Brzeski</div>
+</div>
+</article>
+<article class="card">
+<img src="IMG_7803.JPG" alt="Motorsports photograph">
+<div class="card-body">
+<h3>Trackside Action</h3>
+<p>Capturing the heart of dirt track racing.</p>
+<div class="credit">Photography by Chaz Brzeski</div>
+</div>
+</article>
+</div>
+</section>
+
+<section id="explore">
+<h2 class="section-title">Explore Dirt TrackerZ</h2>
+<div class="links">
+<a href="#drivers">Drivers</a>
+<a href="#tracks">Tracks</a>
+<a href="#photographers">Photographers</a>
+<a href="#results">Race Results</a>
+<a href="#pitpals">Pit Pals</a>
+<a href="#partners">Partners</a>
+</div>
+</section>
+
+<section id="drivers" class="panel">
+<h2>Drivers</h2>
+<p>Discover drivers, their racing careers, cars, teams, and sponsors. Driver profiles are coming soon.</p>
+</section>
+
+<section id="tracks" class="panel">
+<h2>Racetracks</h2>
+<p>Find dirt tracks, upcoming events, track information, and racing updates. Track listings are coming soon.</p>
+</section>
+
+<section id="photographers" class="panel">
+<h2>Photographers</h2>
+<p>Discover the creators who capture the action. Photographer profiles and galleries are coming soon.</p>
+</section>
+
+<section id="results" class="panel">
+<h2>Race Results</h2>
+<p>Follow the winners, race results, and highlights from tracks across the dirt racing community. Results are coming soon.</p>
+</section>
+
+<section id="pitpals" class="panel">
+<h2>Pit Pals</h2>
+<p>Connect with fellow racing fans and discover what your Pit Pals are following. Fan accounts are coming soon.</p>
+</section>
+
+<section id="partners" class="panel">
+<h2>Our Partners</h2>
+<p>Showcase the businesses and sponsors supporting dirt track racing. Partner opportunities are coming soon.</p>
+</section>
+</main>
+
+<footer>
+<strong>DIRT TRACKERZ</strong>
+<p>Built for the fans, drivers, photographers, tracks, and everyone who loves dirt track racing.</p>
+<p>&copy; 2026 Dirt TrackerZ. All rights reserved.</p>
+</footer>
 </body>
 </html>
