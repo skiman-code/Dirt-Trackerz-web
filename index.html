@@ -1,274 +1,433 @@
--- DIRT TRACKERZ DATABASE SETUP
--- Drivers, Tracks, Media, Fans
--- Preserves existing profiles
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dirt Trackerz | The Home of Dirt Track Racing</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --red:#bd1028;
+  --gold:#d9ad50;
+  --dark:#15171b;
+  --panel:#25282e;
+  --ink:#f6f2e9;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:radial-gradient(circle at top,#34373d,#111216 65%);
+  color:var(--ink);
+  font:16px Arial,sans-serif;
+}
+header {
+  background:linear-gradient(#292b30,#101115);
+  border-bottom:3px solid var(--gold);
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.logo {
+  font-size:clamp(27px,5vw,43px);
+  font-weight:900;
+  font-style:italic;
+  color:#f52940;
+  text-shadow:0 2px 0 #600511,0 0 12px #b70d2844;
+}
+.logo span { color:var(--gold); }
+nav { display:flex;gap:10px;flex-wrap:wrap; }
+nav a { color:white;text-decoration:none;font-weight:bold; }
+main { max-width:1100px;margin:auto;padding:24px 16px 70px; }
+.hero {
+  text-align:center;
+  padding:40px 15px;
+  border:1px solid #745d39;
+  border-radius:16px;
+  background:linear-gradient(145deg,#3b3d42,#121316);
+  box-shadow:inset 0 1px 4px #ffffff33;
+}
+h1 { font-size:clamp(28px,5vw,54px);margin:0 0 12px; }
+h2 { color:var(--gold); }
+.muted { color:#c4c4c8; }
+button,.btn {
+  display:inline-block;
+  cursor:pointer;
+  border:1px solid #f5d782;
+  border-radius:12px;
+  padding:12px 18px;
+  color:white;
+  font-weight:800;
+  background:linear-gradient(#ff5768,#b20825 55%,#75071c);
+  box-shadow:inset 0 2px 3px #ffffff70,0 5px 0 #570816,0 7px 12px #0008;
+  text-decoration:none;
+  margin:6px 4px;
+}
+button:active {
+  transform:translateY(3px);
+  box-shadow:inset 0 2px 3px #ffffff70,0 2px 0 #570816;
+}
+button.secondary {
+  background:linear-gradient(#f2d78a,#ad7e29);
+  color:#191919;
+  box-shadow:inset 0 2px 3px #fff8,0 5px 0 #624615;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin:22px 0;
+}
+.card {
+  background:linear-gradient(145deg,#34373e,#1c1e23);
+  border:1px solid #6a5a40;
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 8px 20px #0005;
+}
+section { margin-top:32px; }
+input,select,textarea {
+  width:100%;
+  padding:12px;
+  border-radius:9px;
+  background:#101216;
+  border:1px solid #777;
+  color:white;
+  margin:7px 0 14px;
+  font:inherit;
+}
+label { font-weight:bold;font-size:14px; }
+.hidden { display:none!important; }
+.status {
+  min-height:24px;
+  color:#f3d47c;
+  white-space:pre-wrap;
+}
+.avatar {
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  background:#222;
+}
+.cover {
+  width:100%;
+  max-height:220px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.small { font-size:13px; }
+</style>
+</head>
+<body>
 
-CREATE TABLE IF NOT EXISTS public.profiles (
-  id uuid PRIMARY KEY
-  REFERENCES auth.users(id)
-  ON DELETE CASCADE
-);
+<header>
+  <div class="logo">DIRT <span>TRACKERZ</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#community">Community</a>
+    <a href="#account">My Profile</a>
+    <a href="#partners">Partners</a>
+  </nav>
+</header>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS account_type text DEFAULT 'fan';
+<main>
+<section id="home" class="hero">
+  <h1>THE HOME OF DIRT TRACK RACING</h1>
+  <p>Drivers. Tracks. Media. Fans. One racing community.</p>
+  <a class="btn" href="#account">CREATE FREE PROFILE</a>
+  <a class="btn" href="#community">EXPLORE</a>
+</section>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS display_name text DEFAULT '';
+<section id="community">
+  <h2>Explore Dirt Trackerz</h2>
+  <div class="grid">
+    <article class="card">
+      <h2>🏁 Drivers</h2>
+      <p>Race cars, teams, sponsors and driver profiles.</p>
+    </article>
+    <article class="card">
+      <h2>🏟️ Tracks</h2>
+      <p>Track information, schedules, results and rainouts.</p>
+    </article>
+    <article class="card">
+      <h2>📸 Media</h2>
+      <p>Photographers, videographers and racing storytellers.</p>
+    </article>
+    <article class="card">
+      <h2>🏆 Race Results</h2>
+      <p>Event results and winner coverage coming as verified data is added.</p>
+    </article>
+    <article class="card">
+      <h2>📷 Galleries</h2>
+      <p>Approved media galleries coming soon.</p>
+    </article>
+    <article class="card">
+      <h2>🤝 Pit Pals</h2>
+      <p>Follow your favorite racing personalities as community features expand.</p>
+    </article>
+  </div>
+</section>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS bio text DEFAULT '';
+<section id="account">
+  <h2>Your Dirt Trackerz Account</h2>
+  <p class="muted">Free to join. Everyone can browse without an account.</p>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS hometown text DEFAULT '';
+  <div id="signedOut" class="grid">
+    <div class="card">
+      <h2>Create Account</h2>
+      <form id="signup">
+        <label>Display name
+          <input id="signupName" maxlength="150" required>
+        </label>
+        <label>Email
+          <input id="signupEmail" type="email" required>
+        </label>
+        <label>Password (minimum 8 characters)
+          <input id="signupPassword" type="password" minlength="8" required>
+        </label>
+        <label>Account type
+          <select id="signupType">
+            <option value="fan">Fan</option>
+            <option value="driver">Driver</option>
+            <option value="track">Track operator</option>
+            <option value="media">Media creator</option>
+          </select>
+        </label>
+        <button type="submit">REGISTER FREE</button>
+      </form>
+    </div>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS profile_photo text;
+    <div class="card">
+      <h2>Sign In</h2>
+      <form id="signin">
+        <label>Email
+          <input id="loginEmail" type="email" required>
+        </label>
+        <label>Password
+          <input id="loginPassword" type="password" required>
+        </label>
+        <button type="submit" class="secondary">SIGN IN</button>
+      </form>
+    </div>
+  </div>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS cover_photo text;
+  <div id="signedIn" class="card hidden">
+    <button id="signout" class="secondary">SIGN OUT</button>
+    <h2>Edit Your Profile</h2>
+    <p id="approvalMessage"></p>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS car_number text;
+    <form id="profileForm">
+      <label>Display name
+        <input name="display_name" maxlength="150" required>
+      </label>
+      <label>Biography
+        <textarea name="bio" rows="3"></textarea>
+      </label>
+      <label>Hometown
+        <input name="hometown">
+      </label>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS racing_class text;
+      <div id="driverFields" class="hidden">
+        <label>Car number
+          <input name="car_number">
+        </label>
+        <label>Racing class
+          <input name="racing_class">
+        </label>
+        <label>Team
+          <input name="team_name">
+        </label>
+        <label>Sponsors
+          <input name="sponsors">
+        </label>
+      </div>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS team_name text;
+      <div id="trackFields" class="hidden">
+        <label>Track name
+          <input name="track_name">
+        </label>
+        <label>Track location
+          <input name="track_location">
+        </label>
+      </div>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS sponsors text;
+      <div id="mediaFields" class="hidden">
+        <label>Media business name
+          <input name="media_name">
+        </label>
+      </div>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS track_name text;
+      <label>Website
+        <input name="website" type="url" placeholder="https://">
+      </label>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS track_location text;
+      <label>Profile photo (JPG, PNG, WebP; up to 2 MB)
+        <input id="avatarFile" type="file" accept="image/jpeg,image/png,image/webp">
+      </label>
+      <img id="avatarPreview" class="avatar hidden" alt="Your profile photo">
+      <button type="submit">SAVE PROFILE</button>
+    </form>
+  </div>
+  <p class="status" id="message" role="status"></p>
+</section>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS media_name text;
+<section id="partners" class="card">
+  <h2>Partners & Sponsors</h2>
+  <p>Help power the dirt track racing community. Partner packages and placements are being prepared.</p>
+</section>
+</main>
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS website text;
+<script>
+const SUPABASE_URL = 'https://nxbjxwcezrbboivjldjt.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_R4yOt279wBoMGF3BYRkJSA_zp_sMOEf';
+const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS approval_status text
-DEFAULT 'pending';
+const $ = id => document.getElementById(id);
+const message = t => $('message').textContent = t;
+let currentUser = null;
+let currentProfile = null;
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS created_at timestamptz
-DEFAULT now();
+async function refresh() {
+  const {data:{user},error} = await db.auth.getUser();
+  currentUser = error ? null : user;
+  $('signedOut').classList.toggle('hidden',!!currentUser);
+  $('signedIn').classList.toggle('hidden',!currentUser);
+  if (!currentUser) return;
 
-ALTER TABLE public.profiles
-ADD COLUMN IF NOT EXISTS updated_at timestamptz
-DEFAULT now();
+  const result = await db.from('profiles')
+    .select('*').eq('id',currentUser.id).single();
 
--- Approve existing drivers and fans
+  if (result.error) {
+    message('Profile unavailable: '+result.error.message);
+    return;
+  }
 
-UPDATE public.profiles
-SET approval_status = 'approved'
-WHERE account_type IN ('fan', 'driver')
-AND (
-  approval_status IS NULL
-  OR approval_status = 'pending'
-);
+  currentProfile = result.data;
+  const f = $('profileForm');
+  for (const field of f.elements) {
+    if (field.name && field.name in currentProfile)
+      field.value = currentProfile[field.name] || '';
+  }
 
--- Enable database security
+  for (const type of ['driver','track','media'])
+    $(type+'Fields').classList.toggle(
+      'hidden',currentProfile.account_type !== type
+    );
 
-ALTER TABLE public.profiles
-ENABLE ROW LEVEL SECURITY;
+  $('approvalMessage').textContent =
+    'Account: '+currentProfile.account_type+
+    ' | Status: '+currentProfile.approval_status+
+    (currentProfile.approval_status === 'pending'
+      ? ' — Awaiting administrator approval.' : '');
 
-DROP POLICY IF EXISTS
-"Read approved profiles or own"
-ON public.profiles;
+  const path = currentProfile.profile_photo;
+  $('avatarPreview').classList.toggle('hidden',!path);
 
-DROP POLICY IF EXISTS
-"Public can view approved profiles"
-ON public.profiles;
+  if (path) {
+    const {data} = await db.storage.from('avatars')
+      .createSignedUrl(path,3600);
+    if (data) $('avatarPreview').src = data.signedUrl;
+  }
+}
 
-DROP POLICY IF EXISTS
-"Users update own profiles"
-ON public.profiles;
+$('signup').onsubmit = async e => {
+  e.preventDefault();
+  message('Creating your account...');
 
-CREATE POLICY "Read approved profiles or own"
-ON public.profiles
-FOR SELECT TO authenticated
-USING (
-  approval_status = 'approved'
-  OR id = (SELECT auth.uid())
-);
+  const {error} = await db.auth.signUp({
+    email:$('signupEmail').value.trim(),
+    password:$('signupPassword').value,
+    options:{
+      data:{
+        display_name:$('signupName').value.trim(),
+        account_type:$('signupType').value
+      }
+    }
+  });
 
-CREATE POLICY "Public can view approved profiles"
-ON public.profiles
-FOR SELECT TO anon
-USING (approval_status = 'approved');
+  message(error
+    ? 'Registration failed: '+error.message
+    : 'Account created. Check your email for a confirmation link if email confirmation is enabled, then sign in.');
 
-CREATE POLICY "Users update own profiles"
-ON public.profiles
-FOR UPDATE TO authenticated
-USING (id = (SELECT auth.uid()))
-WITH CHECK (id = (SELECT auth.uid()));
+  if (!error) await refresh();
+};
 
--- Automatically create user profiles
+$('signin').onsubmit = async e => {
+  e.preventDefault();
+  message('Signing in...');
 
-CREATE OR REPLACE FUNCTION
-public.create_user_profile()
-RETURNS trigger
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = ''
-AS $$
-DECLARE
-  chosen text;
-BEGIN
-  chosen := new.raw_user_meta_data
-    ->> 'account_type';
+  const {error} = await db.auth.signInWithPassword({
+    email:$('loginEmail').value.trim(),
+    password:$('loginPassword').value
+  });
 
-  IF chosen IS NULL OR chosen NOT IN (
-    'fan', 'driver', 'track', 'media'
-  ) THEN
-    chosen := 'fan';
-  END IF;
+  message(error ? 'Sign in failed: '+error.message : 'Signed in.');
+  if (!error) await refresh();
+};
 
-  INSERT INTO public.profiles (
-    id,
-    account_type,
-    display_name,
-    approval_status
-  )
-  VALUES (
-    new.id,
-    chosen,
-    left(
-      coalesce(
-        new.raw_user_meta_data
-          ->> 'display_name',
-        ''
-      ),
-      150
-    ),
-    CASE
-      WHEN chosen IN ('fan', 'driver')
-      THEN 'approved'
-      ELSE 'pending'
-    END
-  )
-  ON CONFLICT (id) DO NOTHING;
+$('signout').onclick = async () => {
+  const {error} = await db.auth.signOut();
+  message(error ? error.message : 'Signed out.');
+  await refresh();
+};
 
-  RETURN new;
-END;
-$$;
+$('profileForm').onsubmit = async e => {
+  e.preventDefault();
+  if (!currentUser) return;
+  message('Saving profile...');
 
-DROP TRIGGER IF EXISTS
-on_auth_user_created
-ON auth.users;
+  const f = new FormData(e.currentTarget);
+  const fields = [
+    'display_name','bio','hometown','car_number',
+    'racing_class','team_name','sponsors','track_name',
+    'track_location','media_name','website'
+  ];
 
-CREATE TRIGGER on_auth_user_created
-AFTER INSERT ON auth.users
-FOR EACH ROW
-EXECUTE FUNCTION public.create_user_profile();
+  const changes = {};
+  for (const k of fields)
+    if (f.has(k)) changes[k] = String(f.get(k)||'').trim();
 
--- Protect ownership and approval fields
+  const file = $('avatarFile').files[0];
+  if (file) {
+    if (file.size > 2*1024*1024 ||
+        !['image/jpeg','image/png','image/webp'].includes(file.type)) {
+      message('Use a JPG, PNG or WebP under 2 MB.');
+      return;
+    }
 
-CREATE OR REPLACE FUNCTION
-public.protect_profile_fields()
-RETURNS trigger
-LANGUAGE plpgsql
-SET search_path = ''
-AS $$
-BEGIN
-  IF new.id IS DISTINCT FROM old.id
-    OR new.account_type IS DISTINCT
-       FROM old.account_type
-    OR new.approval_status IS DISTINCT
-       FROM old.approval_status
-    OR new.created_at IS DISTINCT
-       FROM old.created_at
-  THEN
-    RAISE EXCEPTION
-      'Protected profile fields cannot be changed';
-  END IF;
+    const ext = {
+      'image/jpeg':'jpg',
+      'image/png':'png',
+      'image/webp':'webp'
+    }[file.type];
 
-  new.updated_at = now();
-  RETURN new;
-END;
-$$;
+    const path = currentUser.id+'/avatar.'+ext;
+    const upload = await db.storage.from('avatars')
+      .upload(path,file,{upsert:true,contentType:file.type});
 
-DROP TRIGGER IF EXISTS
-protect_profile_fields_trigger
-ON public.profiles;
+    if (upload.error) {
+      message('Photo upload failed: '+upload.error.message);
+      return;
+    }
+    changes.profile_photo = path;
+  }
 
-CREATE TRIGGER protect_profile_fields_trigger
-BEFORE UPDATE ON public.profiles
-FOR EACH ROW
-EXECUTE FUNCTION public.protect_profile_fields();
+  const {error} = await db.from('profiles')
+    .update(changes).eq('id',currentUser.id);
 
-GRANT SELECT ON public.profiles TO anon;
+  message(error
+    ? 'Save failed: '+error.message
+    : 'Profile saved successfully.');
 
-GRANT SELECT, UPDATE
-ON public.profiles TO authenticated;
+  if (!error) await refresh();
+};
 
--- PROFILE PHOTO STORAGE
-
-INSERT INTO storage.buckets (
-  id,
-  name,
-  public,
-  file_size_limit,
-  allowed_mime_types
-)
-VALUES (
-  'avatars',
-  'avatars',
-  false,
-  2097152,
-  ARRAY[
-    'image/jpeg',
-    'image/png',
-    'image/webp'
-  ]
-)
-ON CONFLICT (id) DO NOTHING;
-
-DROP POLICY IF EXISTS
-"Avatar owner upload"
-ON storage.objects;
-
-DROP POLICY IF EXISTS
-"Avatar owner update"
-ON storage.objects;
-
-DROP POLICY IF EXISTS
-"Avatar owner read"
-ON storage.objects;
-
-CREATE POLICY "Avatar owner upload"
-ON storage.objects
-FOR INSERT TO authenticated
-WITH CHECK (
-  bucket_id = 'avatars'
-  AND (storage.foldername(name))[1]
-  = (SELECT auth.uid())::text
-);
-
-CREATE POLICY "Avatar owner update"
-ON storage.objects
-FOR UPDATE TO authenticated
-USING (
-  bucket_id = 'avatars'
-  AND (storage.foldername(name))[1]
-  = (SELECT auth.uid())::text
-)
-WITH CHECK (
-  bucket_id = 'avatars'
-  AND (storage.foldername(name))[1]
-  = (SELECT auth.uid())::text
-);
-
-CREATE POLICY "Avatar owner read"
-ON storage.objects
-FOR SELECT TO authenticated
-USING (
-  bucket_id = 'avatars'
-  AND (storage.foldername(name))[1]
-  = (SELECT auth.uid())::text
-);
+db.auth.onAuthStateChange(() => setTimeout(refresh,0));
+refresh();
+</script>
+</body>
+</html>
