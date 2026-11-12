@@ -148,5 +148,17 @@ nav{justify-content:center}
 <p>Built for the fans, drivers, photographers, tracks, and everyone who loves dirt track racing.</p>
 <p>&copy; 2026 Dirt TrackerZ. All rights reserved.</p>
 </footer>
+
+<!-- Dirt Trackerz Supabase Connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://nxbjxwcezrbboivjldjt.supabase.co";
+  const supabaseKey = "sb_publishable_R4yOt279wBoMGF3BYRkJSA_zp_sMOEf";
+
+  const supabaseClient = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+  );
+</script>
 </body>
 </html>
